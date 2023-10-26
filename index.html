@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>lv03</title>
-		<meta name="description" content="これはコーティングlv3のサイトです" />
+		<title>ShimakawaShodai Portflio 2024</title>
+		<meta name="description" content="" />
 
 		<!-- google font -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,21 +21,25 @@
 		<!-- local css -->
 		<link rel="stylesheet" href="./css/index.css" />
 	</head>
-	<body></body>
+	<body>
+		<div id="canvas-container"></div>
+		<p class="txt">Portfolio</p>
+		<div class="css3drender"></div>
 
-	<!-- global scripts -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-	<script type="importmap">
-		{
-			"imports": {
-				"three": "https://unpkg.com/three@0.142.0/build/three.module.js",
-				"three/addons": "https://unpkg.com/three@0.142.0/examples/jsm"
+		<!-- global scripts -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://unpkg.com/three@0.142.0/build/three.module.js",
+					"three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+				}
 			}
-		}
-	</script>
-	<script src="./common/js/main.js"></script>
-	<!-- / global scripts -->
-	<script type="module" src="./js/index.js"></script>
+		</script>
+		<script src="./common/js/main.js"></script>
+		<!-- / global scripts -->
+		<script src="./js/index.js" type="module"></script>
+	</body>
 </html>

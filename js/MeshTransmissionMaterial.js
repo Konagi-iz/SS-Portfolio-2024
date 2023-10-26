@@ -8,30 +8,30 @@
  *    https://github.com/junni-inc/next.junni.co.jp/blob/master/src/ts/MainScene/World/Sections/Section2/Transparents/Transparent/shaders/transparent.fs
  */
 
-import * as THREE from 'three'
+import * as THREE from "three";
 
 export class MeshTransmissionMaterial extends THREE.MeshPhysicalMaterial {
-  constructor(samples = 6) {
-    super()
+	constructor(samples = 6) {
+		super();
 
-    this.uniforms = {
-      chromaticAberration: { value: 0.05 },
-      anisotrophicBlur: { value: 0.1 },
-      time: { value: 0 },
-      distortion: { value: 0.0 },
-      distortionScale: { value: 0.5 },
-      temporalDistortion: { value: 0.0 }
-    }
+		this.uniforms = {
+			chromaticAberration: { value: 0.05 },
+			anisotrophicBlur: { value: 0.1 },
+			time: { value: 0 },
+			distortion: { value: 0.0 },
+			distortionScale: { value: 0.5 },
+			temporalDistortion: { value: 0.0 },
+		};
 
-    this.onBeforeCompile = (shader) => {
-      shader.uniforms = {
-        ...shader.uniforms,
-        ...this.uniforms
-      }
+		this.onBeforeCompile = (shader) => {
+			shader.uniforms = {
+				...shader.uniforms,
+				...this.uniforms,
+			};
 
-      // Head
-      shader.fragmentShader =
-        /*glsl*/ `
+			// Head
+			shader.fragmentShader =
+				/*glsl*/ `
       uniform float chromaticAberration;            
       uniform float anisotrophicBlur;      
       uniform float time;
@@ -121,12 +121,12 @@ export class MeshTransmissionMaterial extends THREE.MeshPhysicalMaterial {
               +0.2666667* snoise(2.0*m)
               +0.1333333* snoise(4.0*m)
               +0.0666667* snoise(8.0*m);
-      }\n` + shader.fragmentShader
+      }\n` + shader.fragmentShader;
 
-      // Remove transmission
-      shader.fragmentShader = shader.fragmentShader.replace(
-        '#include <transmission_pars_fragment>',
-        /*glsl*/ `
+			// Remove transmission
+			shader.fragmentShader = shader.fragmentShader.replace(
+				"#include <transmission_pars_fragment>",
+				/*glsl*/ `
         #ifdef USE_TRANSMISSION
           // Transmission code is based on glTF-Sampler-Viewer
           // https://github.com/KhronosGroup/glTF-Sample-Viewer
@@ -199,12 +199,12 @@ export class MeshTransmissionMaterial extends THREE.MeshPhysicalMaterial {
             return vec4( ( 1.0 - F ) * attenuatedColor * diffuseColor, transmittedLight.a );
           }
         #endif\n`
-      )
+			);
 
-      // Add refraction
-      shader.fragmentShader = shader.fragmentShader.replace(
-        '#include <transmission_fragment>',
-        /*glsl*/ `
+			// Add refraction
+			shader.fragmentShader = shader.fragmentShader.replace(
+				"#include <transmission_fragment>",
+				/*glsl*/ `
         // Improve the refraction to use the world pos
         material.transmission = transmission;
         material.transmissionAlpha = 1.0;
@@ -253,14 +253,14 @@ export class MeshTransmissionMaterial extends THREE.MeshPhysicalMaterial {
         }
         transmission /= ${samples}.0;
         totalDiffuse = mix( totalDiffuse, transmission.rgb, material.transmission );\n`
-      )
-    }
+			);
+		};
 
-    Object.keys(this.uniforms).forEach((name) =>
-      Object.defineProperty(this, name, {
-        get: () => this.uniforms[name].value,
-        set: (v) => (this.uniforms[name].value = v)
-      })
-    )
-  }
+		Object.keys(this.uniforms).forEach((name) =>
+			Object.defineProperty(this, name, {
+				get: () => this.uniforms[name].value,
+				set: (v) => (this.uniforms[name].value = v),
+			})
+		);
+	}
 }

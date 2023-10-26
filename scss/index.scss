@@ -1,3 +1,12 @@
 @charset "utf-8";
 
 @use "../common/scss/global" as *;
+
+.txt {
+    font-size: 128px;
+    color: white;
+}
+.css3drender {
+    position: absolute;
+    top: 0;
+}
