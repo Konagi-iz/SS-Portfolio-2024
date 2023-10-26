@@ -5,31 +5,23 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
-import {
-	CSS3DRenderer,
-	CSS3DObject,
-} from "three/addons/renderers/CSS3DRenderer.js";
 
 let w = window.innerWidth;
 let h = window.innerHeight;
 
 const renderer = new THREE.WebGLRenderer({
 	antialias: true,
-	// alpha: true,
+	alpha: true,
 });
 const container = document.getElementById("canvas-container");
 container.appendChild(renderer.domElement);
 
-const cssrender = new CSS3DRenderer();
-document.querySelector(".css3drender").appendChild(cssrender.domElement);
-
 const scene = new THREE.Scene();
-// const cssscene = new THREE.Scene();
 
 const fov = 60;
 const fovRad = (fov / 2) * (Math.PI / 180);
 const dist = h / 2 / Math.tan(fovRad);
-const camera = new THREE.PerspectiveCamera(fov, 1.0);
+const camera = new THREE.PerspectiveCamera(fov, w / h, 1, dist * 2);
 camera.position.z = dist;
 
 const controls = new OrbitControls(camera, document.body);
@@ -51,34 +43,136 @@ const boxMaterial = new THREE.MeshPhysicalMaterial({
 });
 const box = new THREE.Mesh(boxGeometry, boxMaterial);
 box.scale.set(200, 200, 200);
-scene.add(box);
+// scene.add(box);
 
 // TextMesh
+const Beatrice = "../src/Beatrice Headline Trial_Italic.json",
+	Arial = "../src/Arial_Regular.json";
+const orange = new THREE.Color(0xff4b12),
+	white = new THREE.Color(0xffffff);
 const fontLoader = new FontLoader();
-const font = fontLoader.load(
-	"../src/Beatrice Headline Trial_Italic.json",
-	(font) => {
-		const txtGeometry = new TextGeometry("Portfolio", {
+
+const txtData = [
+	{
+		font: Beatrice,
+		text: "S",
+		size: "192",
+		color: orange,
+		pos: {
+			x: -621,
+			y: 221,
+			z: -200,
+		},
+	},
+	{
+		font: Beatrice,
+		text: "shimakawa",
+		size: "20",
+		color: white,
+		pos: {
+			x: -481,
+			y: 136,
+			z: -200,
+		},
+	},
+	{
+		font: Arial,
+		text: "S",
+		size: "192",
+		color: white,
+		pos: {
+			x: -333,
+			y: 221,
+			z: -200,
+		},
+	},
+	{
+		font: Arial,
+		text: "shodai",
+		size: "20",
+		color: white,
+		pos: {
+			x: -228,
+			y: 136,
+			z: -200,
+		},
+	},
+	{
+		font: Beatrice,
+		text: "Port",
+		size: "192",
+		color: orange,
+		pos: {
+			x: -360,
+			y: 3.5,
+			z: -200,
+		},
+	},
+	{
+		font: Arial,
+		text: "Fol",
+		size: "192",
+		color: white,
+		pos: {
+			x: 175,
+			y: 12,
+			z: -200,
+		},
+	},
+	{
+		font: Beatrice,
+		text: "io",
+		size: "192",
+		color: orange,
+		pos: {
+			x: 473,
+			y: 3.5,
+			z: -200,
+		},
+	},
+	{
+		font: Arial,
+		text: "20",
+		size: "192",
+		color: white,
+		pos: {
+			x: -561,
+			y: -224,
+			z: -200,
+		},
+	},
+	{
+		font: Beatrice,
+		text: "24",
+		size: "192",
+		color: orange,
+		pos: {
+			x: -262,
+			y: -220,
+			z: -200,
+		},
+	},
+];
+
+txtData.forEach((e, i) => {
+	createText(e.font, e.text, e.size, e.color, e.pos.x, e.pos.y, e.pos.z);
+});
+
+function createText(font, text, size, color, posX, posY, posZ) {
+	fontLoader.load(font, (font) => {
+		const txtGeometry = new TextGeometry(text, {
 			font: font,
-			weight: "bold",
-			size: 1,
+			size: size,
 			height: 0,
 			curveSegments: 12,
 		});
-		txtGeometry.center();
-		const txtMaterial = new THREE.MeshBasicMaterial({});
+		// txtGeometry.center();
+		const txtMaterial = new THREE.MeshBasicMaterial({ color: color });
 		const txtMesh = new THREE.Mesh(txtGeometry, txtMaterial);
-		txtMesh.scale.set(120, 120, 120);
+		txtMesh.position.set(posX, posY, posZ);
 		scene.add(txtMesh);
-		txtMesh.position.set(0, 0, -120);
-	}
-);
-
-// // DOM txt
-// const txt = document.querySelector(".txt");
-// const txt3d = new CSS3DObject(txt);
-// // txt3d.position.set(100, 100, 0);
-// scene.add(txt3d);
+	});
+}
 
 // Directional Light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -114,7 +208,6 @@ function onResize() {
 
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(w, h);
-	cssrender.setSize(w, h);
 
 	camera.aspect = w / h;
 	camera.updateProjectionMatrix();
