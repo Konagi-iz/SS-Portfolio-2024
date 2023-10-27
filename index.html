@@ -7,12 +7,13 @@
 		<title>ShimakawaShodai Portflio 2024</title>
 		<meta name="description" content="" />
 
-		<!-- google font -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<!-- global font -->
 		<link
-			href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Oswald:wght@300&display=swap"
-			rel="stylesheet"
+			rel="preload"
+			href="./common/src/font/BeatriceHeadline-RegularItalic.woff"
+			as="font"
+			type="font/woff"
+			crossorigin
 		/>
 
 		<!-- global css -->
@@ -22,9 +23,91 @@
 		<link rel="stylesheet" href="./css/index.css" />
 	</head>
 	<body>
-		<div id="canvas-container"></div>
-		<p class="txt">Portfolio</p>
-		<div class="css3drender"></div>
+		<div class="lcl-canvas" id="canvas-container"></div>
+		<!-- .lcl-canvas -->
+
+		<div class="overlay">
+			<div class="overlay__line"></div>
+			<div class="overlay__line"></div>
+		</div>
+		<!-- .overlay -->
+
+		<header class="header">
+			<div class="header-top">
+				<a href="./index.html" class="header-top__link header-top__link--left">
+					Portfolio<br />
+					2024
+				</a>
+				<a
+					href="./index.html"
+					class="header-top__link header-top__link--center"
+				>
+					<h1 class="header-top__ttl">Shimakawa Shodai</h1>
+				</a>
+				<a href="./index.html" class="header-top__link header-top__link--about">
+					About
+				</a>
+			</div>
+			<!-- .header-top -->
+
+			<div class="menu">
+				<button class="menubtn">
+					<span class="menubtn__line"></span>
+					<span class="menubtn__line"></span>
+					<span class="menubtn__line"></span>
+					<span class="menubtn__line"></span>
+				</button>
+				<!-- .menubtn -->
+
+				<nav class="nav">
+					<ul class="nav-list">
+						<li class="nav-list__item">
+							<a href="./index.html" class="nav-list__link"> Home </a>
+						</li>
+						<li class="nav-list__item">
+							<a href="./about/about.html" class="nav-list__link"> About </a>
+						</li>
+					</ul>
+					<!-- .nav-list -->
+				</nav>
+				<!-- .nav -->
+			</div>
+			<!-- .menu -->
+		</header>
+		<!-- .header -->
+
+		<main class="main">
+			<div class="lcl-fv">
+				<div class="lcl-fv-tags">
+					<span class="lcl-fv-tags__tag">Web Design</span>
+					<span class="lcl-fv-tags__tag">Front-end Development</span>
+				</div>
+				<!-- .lcl-fv-tags -->
+				<div class="lcl-fv-footer">
+					<span class="lcl-fv-footer__txt">Scroll Down</span>
+				</div>
+				<!-- .lcl-fv-footer -->
+			</div>
+			<!-- .lcl-fv -->
+
+			<section class="lcl-about">
+				<div class="lcl-about__in">
+					<h2 class="lcl-about__big">Hello!!</h2>
+					<p class="lcl-about-txt01">
+						<span class="lcl-about-txt01__01">初めまして</span>
+					</p>
+					<p class="lcl-about-txt02">
+						<span class="lcl-about-txt02__01">Shimakawa</span>
+					</p>
+					<p class="lcl-about-txt03">
+						<span class="lcl-about-txt03__01"> Shodai </span>
+						<span class="lcl-about-txt03__02"> と </span>
+						<span class="lcl-about-txt03__03"> 申します。 </span>
+					</p>
+				</div>
+			</section>
+		</main>
+		<!-- .main -->
 
 		<!-- global scripts -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

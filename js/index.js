@@ -6,9 +6,14 @@ import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 
+/*---------------------------------------------
+fv 3D
+---------------------------------------------*/
+
 let w = window.innerWidth;
 let h = window.innerHeight;
 
+// renderer
 const renderer = new THREE.WebGLRenderer({
 	antialias: true,
 	alpha: true,
@@ -16,18 +21,20 @@ const renderer = new THREE.WebGLRenderer({
 const container = document.getElementById("canvas-container");
 container.appendChild(renderer.domElement);
 
+// scene
 const scene = new THREE.Scene();
 
-const fov = 60;
+// px base camera
+const fov = 15;
 const fovRad = (fov / 2) * (Math.PI / 180);
 const dist = h / 2 / Math.tan(fovRad);
 const camera = new THREE.PerspectiveCamera(fov, w / h, 1, dist * 2);
 camera.position.z = dist;
 
-const controls = new OrbitControls(camera, document.body);
+// const controls = new OrbitControls(camera, document.body);
 
 // Box Geometry
-const boxGeometry = new RoundedBoxGeometry(1.5, 1.5, 1.5, 16, 0.2);
+const boxGeometry = new RoundedBoxGeometry(1, 1, 1, 16, 0.1);
 const hdr =
 	"https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/studio_small_08_2k.hdr";
 const hdrEquirect = new RGBELoader().load(hdr, () => {
@@ -42,16 +49,16 @@ const boxMaterial = new THREE.MeshPhysicalMaterial({
 	ior: 1.9,
 });
 const box = new THREE.Mesh(boxGeometry, boxMaterial);
-box.scale.set(200, 200, 200);
-// scene.add(box);
+box.scale.set(380, 380, 380);
+scene.add(box);
 
 // TextMesh
-const Beatrice = "../src/Beatrice Headline Trial_Italic.json",
-	Arial = "../src/Arial_Regular.json";
-const orange = new THREE.Color(0xff4b12),
-	white = new THREE.Color(0xffffff);
+const Beatrice = "../src/Beatrice Headline Trial_Italic.json";
+const Arial = "../src/Arial_Regular.json";
+const orange = new THREE.Color(0xff4b12);
+const white = new THREE.Color(0xffffff);
+const textPosZ = -1500;
 const fontLoader = new FontLoader();
-
 const txtData = [
 	{
 		font: Beatrice,
@@ -59,9 +66,9 @@ const txtData = [
 		size: "192",
 		color: orange,
 		pos: {
-			x: -621,
-			y: 221,
-			z: -200,
+			x: -563,
+			y: 248,
+			z: textPosZ,
 		},
 	},
 	{
@@ -70,9 +77,9 @@ const txtData = [
 		size: "20",
 		color: white,
 		pos: {
-			x: -481,
-			y: 136,
-			z: -200,
+			x: -423,
+			y: 163,
+			z: textPosZ,
 		},
 	},
 	{
@@ -81,9 +88,9 @@ const txtData = [
 		size: "192",
 		color: white,
 		pos: {
-			x: -333,
-			y: 221,
-			z: -200,
+			x: -275,
+			y: 248,
+			z: textPosZ,
 		},
 	},
 	{
@@ -92,9 +99,9 @@ const txtData = [
 		size: "20",
 		color: white,
 		pos: {
-			x: -228,
-			y: 136,
-			z: -200,
+			x: -170,
+			y: 163,
+			z: textPosZ,
 		},
 	},
 	{
@@ -103,9 +110,9 @@ const txtData = [
 		size: "192",
 		color: orange,
 		pos: {
-			x: -360,
-			y: 3.5,
-			z: -200,
+			x: -212,
+			y: 16,
+			z: textPosZ,
 		},
 	},
 	{
@@ -114,9 +121,9 @@ const txtData = [
 		size: "192",
 		color: white,
 		pos: {
-			x: 175,
+			x: 257,
 			y: 12,
-			z: -200,
+			z: textPosZ,
 		},
 	},
 	{
@@ -125,9 +132,9 @@ const txtData = [
 		size: "192",
 		color: orange,
 		pos: {
-			x: 473,
+			x: 559,
 			y: 3.5,
-			z: -200,
+			z: textPosZ,
 		},
 	},
 	{
@@ -136,9 +143,9 @@ const txtData = [
 		size: "192",
 		color: white,
 		pos: {
-			x: -561,
+			x: -501,
 			y: -224,
-			z: -200,
+			z: textPosZ,
 		},
 	},
 	{
@@ -147,17 +154,19 @@ const txtData = [
 		size: "192",
 		color: orange,
 		pos: {
-			x: -262,
+			x: -202,
 			y: -220,
-			z: -200,
+			z: textPosZ,
 		},
 	},
 ];
 
+// create all text
 txtData.forEach((e, i) => {
 	createText(e.font, e.text, e.size, e.color, e.pos.x, e.pos.y, e.pos.z);
 });
 
+// create text function
 function createText(font, text, size, color, posX, posY, posZ) {
 	fontLoader.load(font, (font) => {
 		const txtGeometry = new TextGeometry(text, {
@@ -166,7 +175,7 @@ function createText(font, text, size, color, posX, posY, posZ) {
 			height: 0,
 			curveSegments: 12,
 		});
-		// txtGeometry.center();
+		txtGeometry.center();
 		const txtMaterial = new THREE.MeshBasicMaterial({ color: color });
 		const txtMesh = new THREE.Mesh(txtGeometry, txtMaterial);
 		txtMesh.position.set(posX, posY, posZ);
@@ -177,7 +186,6 @@ function createText(font, text, size, color, posX, posY, posZ) {
 // Directional Light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(1, 1, 1);
-
 // Poin Light
 const pointLight = new THREE.PointLight(0xffffff, 2, 1000);
 pointLight.position.set(0, 10, 10);
