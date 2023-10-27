@@ -9,6 +9,11 @@ $c-orange: #ff4b12;
 
 //font
 @font-face {
+	font-family: "Beatrice-Punctuation";
+	font-display: swap;
+	src: url(/common/src/font//Beatrice-punctuation.woff) format("woff");
+}
+@font-face {
 	font-family: "Beatrice-Headline";
 	font-display: swap;
 	src: url(/common/src/font/BeatriceHeadline-RegularItalic.woff) format("woff");
@@ -25,6 +30,7 @@ $c-orange: #ff4b12;
 	font-weight: bold;
 	src: url(/common/src/font/NotoSansJP-Bold.woff2) format("woff2");
 }
-$f-disp: "Beatrice-Headline", serif;
+$f-disp: "Beatrice-Headline", "Beatrice-Punctuation", serif;
 $f-basic: "Arial", sans-serif;
-$f-jp: "noto-sans-jp", sans-serif;
+// $f-jp: "noto-sans-jp", sans-serif;
+$f-jp: 'Noto Sans JP', sans-serif;
