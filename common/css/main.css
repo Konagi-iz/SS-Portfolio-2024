@@ -396,9 +396,11 @@ th {
   src: url(/common/src/font/NotoSansJP-Bold.woff2) format("woff2");
 }
 body {
+  width: 100%;
   background: #101010;
   font-family: "Noto Sans JP", sans-serif;
   color: #ffffff;
+  overflow-x: hidden;
 }
 
 /*---------------------------------------------

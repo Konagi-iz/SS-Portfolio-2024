@@ -3,7 +3,9 @@
 @use "global" as *;
 
 body {
-    background: $c-bg;
-    font-family: $f-jp;
-    color: $c-white;
+	width: 100%;
+	background: $c-bg;
+	font-family: $f-jp;
+	color: $c-white;
+	overflow-x: hidden;
 }

@@ -220,3 +220,57 @@ function onResize() {
 	camera.aspect = w / h;
 	camera.updateProjectionMatrix();
 }
+
+/*---------------------------------------------
+snap scroll
+---------------------------------------------*/
+window.addEventListener("DOMContentLoaded", () => {
+	const snapSec = document.querySelectorAll(".snap-sec");
+	const wHeight = window.innerHeight;
+	let flag = 1;
+	window.addEventListener("scroll", () => {
+		const currentPos = window.scrollY;
+		snapSec.forEach((sec, i) => {
+			const prevPos = snapSec[i].getBoundingClientRect().top + currentPos;
+			const nextPos =
+				snapSec[i + 1]?.getBoundingClientRect().top + currentPos;
+
+			if (snapSec[i + 1]) {
+				if (
+					currentPos > prevPos &&
+					currentPos < nextPos &&
+					flag === 1
+				) {
+					console.log(i);
+					if (currentPos > prevPos) {
+						flag = 2;
+						window.scrollTo({
+							top: nextPos,
+							behavior: "smooth",
+						});
+						window.onscroll = () => {
+							if (nextPos === window.scrollY) {
+								flag = 1;
+								console.log("flag:"+flag);
+							}
+						};
+					} else if (currentPos < prevPos) {
+						console.log("back!");
+						window.scrollTo({
+							top: prevPos,
+							behavior: "smooth",
+						});
+					}
+				}
+			} else {
+				// if (currentPos < prevPos) {
+				// 	console.log(i);
+				// 	window.scrollTo({
+				// 		top: prevPos,
+				// 		behavior: "smooth",
+				// 	});
+				// }
+			}
+		});
+	});
+});
