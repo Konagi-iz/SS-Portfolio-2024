@@ -1,13 +1,17 @@
 @charset "utf-8";
 
-// color
+/*---------------------------------------------
+color
+---------------------------------------------*/
 $c-white: #ffffff;
 $c-black: #000000;
 $c-bg: #101010;
 $c-gray: #383838;
 $c-orange: #ff4b12;
 
-//font
+/*---------------------------------------------
+font
+---------------------------------------------*/
 @font-face {
 	font-family: "Beatrice-Punctuation";
 	font-display: swap;
@@ -16,7 +20,8 @@ $c-orange: #ff4b12;
 @font-face {
 	font-family: "Beatrice-Headline";
 	font-display: swap;
-	src: url(/common/src/font/BeatriceHeadline-RegularItalic.woff) format("woff");
+	src: url(/common/src/font/BeatriceHeadline-RegularItalic.woff)
+		format("woff");
 }
 @font-face {
 	font-family: "noto-sans-jp";
@@ -33,4 +38,9 @@ $c-orange: #ff4b12;
 $f-disp: "Beatrice-Headline", "Beatrice-Punctuation", serif;
 $f-basic: "Arial", sans-serif;
 // $f-jp: "noto-sans-jp", sans-serif;
-$f-jp: 'Noto Sans JP', sans-serif;
+$f-jp: "Noto Sans JP", sans-serif;
+
+/*---------------------------------------------
+ease
+---------------------------------------------*/
+$e-power4-inOut1: cubic-bezier(0.7, 0, 0.1, 1);

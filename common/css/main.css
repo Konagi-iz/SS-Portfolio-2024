@@ -373,6 +373,12 @@ th {
   font-weight: bold;
 }
 
+/*---------------------------------------------
+color
+---------------------------------------------*/
+/*---------------------------------------------
+font
+---------------------------------------------*/
 @font-face {
   font-family: "Beatrice-Punctuation";
   font-display: swap;
@@ -395,6 +401,9 @@ th {
   font-weight: bold;
   src: url(/common/src/font/NotoSansJP-Bold.woff2) format("woff2");
 }
+/*---------------------------------------------
+ease
+---------------------------------------------*/
 body {
   width: 100%;
   background: #101010;
@@ -431,6 +440,7 @@ overlay
 ---------------------------------------------*/
 .header .header-top {
   position: absolute;
+  z-index: 900;
   border-bottom: 1px solid #383838;
   width: 100%;
   height: 68px;

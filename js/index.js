@@ -7,7 +7,7 @@ import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 
 /*---------------------------------------------
-fv 3D
+ fv 3D
 ---------------------------------------------*/
 
 let w = window.innerWidth;
@@ -34,7 +34,7 @@ camera.position.z = dist;
 // const controls = new OrbitControls(camera, document.body);
 
 // Box Geometry
-const boxGeometry = new RoundedBoxGeometry(1, 1, 1, 16, 0.1);
+const boxGeometry = new RoundedBoxGeometry(1, 1, 1, 16, 0.2);
 const hdr =
 	"https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/studio_small_08_2k.hdr";
 const hdrEquirect = new RGBELoader().load(hdr, () => {
@@ -45,7 +45,7 @@ const boxMaterial = new THREE.MeshPhysicalMaterial({
 	transmission: 1,
 	thickness: 0.5,
 	envMap: hdrEquirect,
-	envMapIntensity: 1,
+	envMapIntensity: 0.3,
 	ior: 1.9,
 });
 const box = new THREE.Mesh(boxGeometry, boxMaterial);
@@ -167,6 +167,7 @@ txtData.forEach((e, i) => {
 });
 
 // create text function
+const txtGroup = new THREE.Group();
 function createText(font, text, size, color, posX, posY, posZ) {
 	fontLoader.load(font, (font) => {
 		const txtGeometry = new TextGeometry(text, {
@@ -176,10 +177,13 @@ function createText(font, text, size, color, posX, posY, posZ) {
 			curveSegments: 12,
 		});
 		txtGeometry.center();
-		const txtMaterial = new THREE.MeshBasicMaterial({ color: color });
+		const txtMaterial = new THREE.MeshBasicMaterial({
+			color: color,
+		});
 		const txtMesh = new THREE.Mesh(txtGeometry, txtMaterial);
 		txtMesh.position.set(posX, posY, posZ);
-		scene.add(txtMesh);
+		txtGroup.add(txtMesh);
+		scene.add(txtGroup);
 	});
 }
 
@@ -187,9 +191,82 @@ function createText(font, text, size, color, posX, posY, posZ) {
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(1, 1, 1);
 // Poin Light
-const pointLight = new THREE.PointLight(0xffffff, 2, 1000);
-pointLight.position.set(0, 10, 10);
+const pointLight = new THREE.PointLight(0xffffff, 10000, 0, 0.01);
+pointLight.position.set(0, 0, -1000);
 scene.add(directionalLight, pointLight);
+
+// scroll
+let scrollY = window.scrollY;
+window.addEventListener("scroll", () => {
+	scrollY = window.scrollY;
+});
+
+// box animation
+gsap.to(box.position, {
+	x: w / -4,
+	z: 1000,
+	duration: 1.3,
+	ease: "power4.inOut",
+	scrollTrigger: {
+		// markers: true,
+		trigger: ".lcl-hello",
+		end: "50% bottom",
+		toggleActions: "play play reverse reverse",
+	},
+});
+let currentPos = 0;
+let isPin = false;
+gsap.to(box.position, {
+	x: w / 4,
+	duration: 1.3,
+	ease: "power4.inOut",
+	immediateRender: false,
+	scrollTrigger: {
+		// markers: true,
+		trigger: ".lcl-about",
+		start: "50% bottom",
+		end: "bottom bottom",
+		toggleActions: "play none none reverse",
+		onLeave: () => {
+			currentPos = scrollY;
+			isPin = true;
+		},
+		onEnterBack: () => {
+			isPin = false;
+		},
+	},
+});
+
+// light follow mouse
+const mouse = {
+	x: 0,
+	y: 0,
+	currentX: 0,
+	currentY: 0,
+};
+
+function onMove(x, y) {
+	mouse.currentX = (x - w / 2) * 2;
+	mouse.currentY = (-y + w / 3) * 2;
+}
+
+function lerp(start, end, multiplier) {
+	return start * (1 - multiplier) + end * multiplier;
+}
+
+function onRaf() {
+	mouse.x = lerp(mouse.x, mouse.currentX, 0.04);
+	mouse.y = lerp(mouse.y, mouse.currentY, 0.04);
+
+	gsap.set(pointLight.position, {
+		x: mouse.x,
+		y: mouse.y,
+	});
+}
+
+window.addEventListener("mousemove", (e) => {
+	onMove(e.clientX, e.clientY);
+});
 
 // Loop
 tick();
@@ -200,8 +277,15 @@ function tick() {
 	box.rotation.x = sec * (Math.PI / 10);
 	box.rotation.y = sec * (Math.PI / 10);
 
+	txtGroup.position.y = scrollY;
+
+	if (isPin) {
+		box.position.y = scrollY - currentPos;
+	}
+
+	onRaf();
+
 	renderer.render(scene, camera);
-	// cssrender.render(scene, camera);
 
 	requestAnimationFrame(tick);
 }
@@ -222,55 +306,67 @@ function onResize() {
 }
 
 /*---------------------------------------------
-snap scroll
+ snap scroll
+---------------------------------------------*/
+// window.addEventListener("DOMContentLoaded", () => {
+// 	const snapSec = document.querySelectorAll(".snap-sec");
+// 	const wHeight = window.innerHeight;
+// 	let flag = 1;
+// 	window.addEventListener("scroll", () => {
+// 		const currentPos = window.scrollY;
+// 		snapSec.forEach((sec, i) => {
+// 			const prevPos = snapSec[i].getBoundingClientRect().top + currentPos;
+// 			const nextPos =
+// 				snapSec[i + 1]?.getBoundingClientRect().top + currentPos;
+
+// 			if (snapSec[i + 1]) {
+// 				if (
+// 					currentPos > prevPos &&
+// 					currentPos < nextPos &&
+// 					flag === 1
+// 				) {
+// 					console.log(i);
+// 					if (currentPos > prevPos) {
+// 						flag = 2;
+// 						window.scrollTo({
+// 							top: nextPos,
+// 							behavior: "smooth",
+// 						});
+// 						window.onscroll = () => {
+// 							if (nextPos === window.scrollY) {
+// 								flag = 1;
+// 								console.log("flag:"+flag);
+// 							}
+// 						};
+// 					} else if (currentPos < prevPos) {
+// 						console.log("back!");
+// 						window.scrollTo({
+// 							top: prevPos,
+// 							behavior: "smooth",
+// 						});
+// 					}
+// 				}
+// 			} else {
+// 			}
+// 		});
+// 	});
+// });
+
+/*---------------------------------------------
+ scroll in
 ---------------------------------------------*/
 window.addEventListener("DOMContentLoaded", () => {
-	const snapSec = document.querySelectorAll(".snap-sec");
-	const wHeight = window.innerHeight;
-	let flag = 1;
-	window.addEventListener("scroll", () => {
-		const currentPos = window.scrollY;
-		snapSec.forEach((sec, i) => {
-			const prevPos = snapSec[i].getBoundingClientRect().top + currentPos;
-			const nextPos =
-				snapSec[i + 1]?.getBoundingClientRect().top + currentPos;
-
-			if (snapSec[i + 1]) {
-				if (
-					currentPos > prevPos &&
-					currentPos < nextPos &&
-					flag === 1
-				) {
-					console.log(i);
-					if (currentPos > prevPos) {
-						flag = 2;
-						window.scrollTo({
-							top: nextPos,
-							behavior: "smooth",
-						});
-						window.onscroll = () => {
-							if (nextPos === window.scrollY) {
-								flag = 1;
-								console.log("flag:"+flag);
-							}
-						};
-					} else if (currentPos < prevPos) {
-						console.log("back!");
-						window.scrollTo({
-							top: prevPos,
-							behavior: "smooth",
-						});
-					}
-				}
-			} else {
-				// if (currentPos < prevPos) {
-				// 	console.log(i);
-				// 	window.scrollTo({
-				// 		top: prevPos,
-				// 		behavior: "smooth",
-				// 	});
-				// }
-			}
+	const scrIn = document.querySelectorAll(".scr-in");
+	scrIn.forEach((target) => {
+		ScrollTrigger.create({
+			// markers: true,
+			trigger: target,
+			start: "top 90%",
+			once: true,
+			toggleClass: {
+				targets: target,
+				className: "scr-in--on",
+			},
 		});
 	});
 });
