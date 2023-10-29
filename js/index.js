@@ -205,12 +205,12 @@ window.addEventListener("scroll", () => {
 gsap.to(box.position, {
 	x: w / -4,
 	z: 1000,
-	duration: 1.3,
-	ease: "power4.inOut",
+	ease: "power2.inOut",
 	scrollTrigger: {
 		// markers: true,
 		trigger: ".lcl-hello",
-		end: "50% bottom",
+		end: "90% bottom",
+		scrub: 2,
 		toggleActions: "play play reverse reverse",
 	},
 });
@@ -218,14 +218,14 @@ let currentPos = 0;
 let isPin = false;
 gsap.to(box.position, {
 	x: w / 4,
-	duration: 1.3,
-	ease: "power4.inOut",
+	ease: "power2.inOut",
 	immediateRender: false,
 	scrollTrigger: {
 		// markers: true,
 		trigger: ".lcl-about",
-		start: "50% bottom",
-		end: "bottom bottom",
+		start: "20% bottom",
+		end: "110% bottom",
+		scrub: 2,
 		toggleActions: "play none none reverse",
 		onLeave: () => {
 			currentPos = scrollY;
