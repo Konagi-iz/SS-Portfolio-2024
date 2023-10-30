@@ -203,7 +203,7 @@ window.addEventListener("scroll", () => {
 
 // box animation
 gsap.to(box.position, {
-	x: w / -4,
+	x: w / -3,
 	z: 1000,
 	ease: "power2.inOut",
 	scrollTrigger: {
@@ -217,7 +217,7 @@ gsap.to(box.position, {
 let currentPos = 0;
 let isPin = false;
 gsap.to(box.position, {
-	x: w / 4,
+	x: w / 3,
 	ease: "power2.inOut",
 	immediateRender: false,
 	scrollTrigger: {

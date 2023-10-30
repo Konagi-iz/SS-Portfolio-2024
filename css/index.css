@@ -88,6 +88,7 @@ fv
   padding: 5px 13px;
   border: 1px solid #ffffff;
   border-radius: 999px;
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   font-family: "Arial", sans-serif;
@@ -121,10 +122,12 @@ hello
 }
 .lcl-hello .lcl-hello__in {
   margin-inline: auto 68px;
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
 .lcl-hello .lcl-hello__in > * {
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   line-height: 1.4;
@@ -167,6 +170,7 @@ hello
   transform: translateY(0);
 }
 .lcl-hello .lcl-hello__in .lcl-hello-txt-wrap > * {
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -238,13 +242,15 @@ hello
   transform: translateY(0);
 }
 .lcl-hello .lcl-hello__in .lcl-hello-txt-wrap.scr-in--on .lcl-hello-txt02::after {
-  animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+  -webkit-animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+          animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
 }
 .lcl-hello .lcl-hello__in .lcl-hello-txt-wrap.scr-in--on .lcl-hello-txt02 .lcl-hello-txt02__01 {
   opacity: 1;
 }
 .lcl-hello .lcl-hello__in .lcl-hello-txt-wrap.scr-in--on .lcl-hello-txt03 .lcl-hello-txt03__01::after {
-  animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.7s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+  -webkit-animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.7s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+          animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.7s cubic-bezier(0.9, 0, 0.1, 1) forwards;
 }
 .lcl-hello .lcl-hello__in .lcl-hello-txt-wrap.scr-in--on .lcl-hello-txt03 .lcl-hello-txt03__01 span {
   opacity: 1;
@@ -271,6 +277,7 @@ about
   margin-left: 20px;
 }
 .lcl-about .lcl-about__in > * {
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   font-size: 0;
@@ -389,7 +396,8 @@ about
   transition: transform 0.9s 7.1s ease-out;
 }
 .lcl-about .lcl-about__in.scr-in--on .lcl-about-txt01 .lcl-about-txt01__02::after {
-  animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+  -webkit-animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+          animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
 }
 .lcl-about .lcl-about__in.scr-in--on .lcl-about-txt01 .lcl-about-txt01__02 span {
   opacity: 1;
@@ -403,13 +411,15 @@ about
   transform: scale(1);
 }
 .lcl-about .lcl-about__in.scr-in--on .lcl-about-txt02 .lcl-about-txt02__01::after {
-  animation: txt-rect-reveal-01 0.2s 3.2s linear forwards, txt-rect-reveal-02 0.6s 3.8s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 4.7s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+  -webkit-animation: txt-rect-reveal-01 0.2s 3.2s linear forwards, txt-rect-reveal-02 0.6s 3.8s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 4.7s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+          animation: txt-rect-reveal-01 0.2s 3.2s linear forwards, txt-rect-reveal-02 0.6s 3.8s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 4.7s cubic-bezier(0.9, 0, 0.1, 1) forwards;
 }
 .lcl-about .lcl-about__in.scr-in--on .lcl-about-txt02 .lcl-about-txt02__01 span {
   opacity: 1;
 }
 .lcl-about .lcl-about__in.scr-in--on .lcl-about-txt02 .lcl-about-txt02__03::after {
-  animation: txt-rect-reveal-01 0.2s 3.2s linear forwards, txt-rect-reveal-02 0.6s 3.8s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 5.6s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+  -webkit-animation: txt-rect-reveal-01 0.2s 3.2s linear forwards, txt-rect-reveal-02 0.6s 3.8s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 5.6s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+          animation: txt-rect-reveal-01 0.2s 3.2s linear forwards, txt-rect-reveal-02 0.6s 3.8s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 5.6s cubic-bezier(0.9, 0, 0.1, 1) forwards;
 }
 .lcl-about .lcl-about__in.scr-in--on .lcl-about-txt02 .lcl-about-txt02__03 span {
   opacity: 1;
@@ -481,6 +491,7 @@ photo
   height: 100vh;
 }
 .lcl-photo .lcl-photo__in > * {
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   font-size: 0;
@@ -555,13 +566,15 @@ photo
   transform: translateY(0);
 }
 .lcl-photo .lcl-photo__in.scr-in--on .lcl-photo-txt01 .lcl-photo-txt01__02::after {
-  animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+  -webkit-animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+          animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 2.1s cubic-bezier(0.9, 0, 0.1, 1) forwards;
 }
 .lcl-photo .lcl-photo__in.scr-in--on .lcl-photo-txt01 .lcl-photo-txt01__02 span {
   opacity: 1;
 }
 .lcl-photo .lcl-photo__in.scr-in--on .lcl-photo-txt02 .lcl-photo-txt02__02::after {
-  animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 3.2s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+  -webkit-animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 3.2s cubic-bezier(0.9, 0, 0.1, 1) forwards;
+          animation: txt-rect-reveal-01 0.2s 0.6s linear forwards, txt-rect-reveal-02 0.6s 1.2s cubic-bezier(0.9, 0, 0.1, 1) forwards, txt-rect-reveal-03 0.6s 3.2s cubic-bezier(0.9, 0, 0.1, 1) forwards;
 }
 .lcl-photo .lcl-photo__in.scr-in--on .lcl-photo-txt02 .lcl-photo-txt02__02 span {
   opacity: 1;
@@ -578,6 +591,23 @@ photo
 /*---------------------------------------------
 txt-rect-reveal keyframes
 ---------------------------------------------*/
+@-webkit-keyframes txt-rect-reveal-01 {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 @keyframes txt-rect-reveal-01 {
   0% {
     opacity: 1;
@@ -595,12 +625,28 @@ txt-rect-reveal keyframes
     opacity: 1;
   }
 }
+@-webkit-keyframes txt-rect-reveal-02 {
+  0% {
+    transform: scale(0.01, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
 @keyframes txt-rect-reveal-02 {
   0% {
     transform: scale(0.01, 1);
   }
   100% {
     transform: scale(1, 1);
+  }
+}
+@-webkit-keyframes txt-rect-reveal-03 {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 0);
   }
 }
 @keyframes txt-rect-reveal-03 {
