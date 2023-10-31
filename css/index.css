@@ -5,26 +5,21 @@ color
 font
 ---------------------------------------------*/
 @font-face {
-  font-family: "Beatrice-Punctuation";
-  font-display: swap;
-  src: url(/common/src/font//Beatrice-punctuation.woff) format("woff");
-}
-@font-face {
   font-family: "Beatrice-Headline";
   font-display: swap;
-  src: url(/common/src/font/BeatriceHeadline-RegularItalic.woff) format("woff");
+  src: url(/common/assets/font/BeatriceHeadline-RegularItalic.woff) format("woff");
 }
 @font-face {
   font-family: "noto-sans-jp";
   font-display: swap;
   font-weight: normal;
-  src: url(/common/src/font/NotoSansJP-Regular.woff2) format("woff2");
+  src: url(/common/assets/font/NotoSansJP-Regular.woff2) format("woff2");
 }
 @font-face {
   font-family: "noto-sans-jp";
   font-display: swap;
   font-weight: bold;
-  src: url(/common/src/font/NotoSansJP-Bold.woff2) format("woff2");
+  src: url(/common/assets/font/NotoSansJP-Bold.woff2) format("woff2");
 }
 /*---------------------------------------------
 ease
@@ -39,7 +34,7 @@ lcl-txt-basic
 }
 
 .lcl-txt-disp {
-  font-family: "Beatrice-Headline", "Beatrice-Punctuation", serif;
+  font-family: "Beatrice-Headline", serif;
   font-size: 96px;
   color: #ff4b12;
 }
@@ -51,8 +46,8 @@ txt rect reveal
 canvas
 ---------------------------------------------*/
 .lcl-canvas {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 0 !important;
 }
 .lcl-canvas > * {
   pointer-events: none;
@@ -63,7 +58,7 @@ fv
 ---------------------------------------------*/
 .lcl-fv {
   width: 100%;
-  height: 805px;
+  height: 100dvh;
   position: relative;
 }
 .lcl-fv::after {
@@ -139,7 +134,7 @@ hello
 }
 .lcl-hello .lcl-hello__in .lcl-hello-big .lcl-hello-big__txt {
   display: inline-block;
-  font-family: "Beatrice-Headline", "Beatrice-Punctuation", serif;
+  font-family: "Beatrice-Headline", serif;
   font-size: 178px;
   font-style: italic;
   color: #ff4b12;
@@ -471,7 +466,7 @@ about
   transition: transform 0.6s 7.2s cubic-bezier(0.7, 0, 0.1, 1);
 }
 .lcl-about .lcl-about-btn .lcl-about-btn__txt .lcl-about-btn__disp {
-  font-family: "Beatrice-Headline", "Beatrice-Punctuation", serif;
+  font-family: "Beatrice-Headline", serif;
 }
 .lcl-about .lcl-about-btn .lcl-about-btn__svg {
   margin-left: 6px;

@@ -50,11 +50,13 @@ const boxMaterial = new THREE.MeshPhysicalMaterial({
 });
 const box = new THREE.Mesh(boxGeometry, boxMaterial);
 box.scale.set(380, 380, 380);
-scene.add(box);
+const boxGroup = new THREE.Group();
+boxGroup.add(box);
+scene.add(boxGroup);
 
 // TextMesh
-const Beatrice = "../src/Beatrice Headline Trial_Italic.json";
-const Arial = "../src/Arial_Regular.json";
+const Beatrice = "../assets/json/Beatrice_Headline_Italic.json";
+const Arial = "../assets/json/Arial_Regular.json";
 const orange = new THREE.Color(0xff4b12);
 const white = new THREE.Color(0xffffff);
 const textPosZ = -1500;
@@ -202,23 +204,29 @@ window.addEventListener("scroll", () => {
 });
 
 // box animation
-gsap.to(box.position, {
-	x: w / -3,
-	z: 1000,
-	ease: "power2.inOut",
+const boxAnim1 = gsap.timeline({
 	scrollTrigger: {
 		// markers: true,
 		trigger: ".lcl-hello",
 		end: "90% bottom",
 		scrub: 2,
-		toggleActions: "play play reverse reverse",
 	},
 });
-let currentPos = 0;
-let isPin = false;
-gsap.to(box.position, {
-	x: w / 3,
-	ease: "power2.inOut",
+boxAnim1
+	.to(boxGroup.position, {
+		x: w / -4,
+		z: 1000,
+		ease: "power2.inOut",
+	})
+	.to(
+		box.rotation,
+		{
+			y: 3,
+			ease: "power3.inOut",
+		},
+		"<"
+	);
+const boxAnim2 = gsap.timeline({
 	immediateRender: false,
 	scrollTrigger: {
 		// markers: true,
@@ -226,15 +234,30 @@ gsap.to(box.position, {
 		start: "20% bottom",
 		end: "110% bottom",
 		scrub: 2,
-		toggleActions: "play none none reverse",
-		onLeave: () => {
-			currentPos = scrollY;
-			isPin = true;
-		},
-		onEnterBack: () => {
-			isPin = false;
-		},
 	},
+});
+boxAnim2
+	.to(boxGroup.position, {
+		x: w / 4,
+		ease: "power2.inOut",
+	})
+	.to(
+		box.rotation,
+		{
+			x: 3,
+			ease: "power3.inOut",
+		},
+		"<"
+	);
+// canvas pin
+ScrollTrigger.create({
+	markers: true,
+	trigger: ".lcl-hello",
+	start: "top bottom",
+	endTrigger: ".lcl-about",
+	end: "50% 50%",
+	pin: ".lcl-canvas",
+	pinSpacing: false,
 });
 
 // light follow mouse
@@ -244,63 +267,45 @@ const mouse = {
 	currentX: 0,
 	currentY: 0,
 };
-
 function onMove(x, y) {
 	mouse.currentX = (x - w / 2) * 2;
 	mouse.currentY = (-y + w / 3) * 2;
 }
-
 function lerp(start, end, multiplier) {
 	return start * (1 - multiplier) + end * multiplier;
 }
-
 function onRaf() {
 	mouse.x = lerp(mouse.x, mouse.currentX, 0.04);
 	mouse.y = lerp(mouse.y, mouse.currentY, 0.04);
-
 	gsap.set(pointLight.position, {
 		x: mouse.x,
 		y: mouse.y,
 	});
 }
-
 window.addEventListener("mousemove", (e) => {
 	onMove(e.clientX, e.clientY);
 });
 
 // Loop
 tick();
-
 function tick() {
 	const sec = performance.now() / 1000;
-
-	box.rotation.x = sec * (Math.PI / 10);
-	box.rotation.y = sec * (Math.PI / 10);
-
+	boxGroup.rotation.x = sec * (Math.PI / 10);
+	boxGroup.rotation.y = sec * (Math.PI / 10);
 	txtGroup.position.y = scrollY;
-
-	if (isPin) {
-		box.position.y = scrollY - currentPos;
-	}
-
 	onRaf();
-
 	renderer.render(scene, camera);
-
 	requestAnimationFrame(tick);
 }
 
 // Resize
 onResize();
 window.addEventListener("resize", onResize);
-
 function onResize() {
 	w = window.innerWidth;
 	h = window.innerHeight;
-
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(w, h);
-
 	camera.aspect = w / h;
 	camera.updateProjectionMatrix();
 }
