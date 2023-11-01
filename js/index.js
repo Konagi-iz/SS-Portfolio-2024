@@ -251,7 +251,7 @@ boxAnim2
 	);
 // canvas pin
 ScrollTrigger.create({
-	markers: true,
+	// markers: true,
 	trigger: ".lcl-hello",
 	start: "top bottom",
 	endTrigger: ".lcl-about",
