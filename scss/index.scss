@@ -70,7 +70,7 @@ hello
 .lcl-hello {
 	display: flex;
 	align-items: center;
-	padding-inline: 78px;
+	padding-inline: 73px;
 	width: 100%;
 	height: 100vh;
 	.lcl-hello__in {
@@ -88,7 +88,7 @@ hello
 	.lcl-hello-big__txt {
 		display: inline-block;
 		font-family: $f-disp;
-		font-size: 178px;
+		font-size: 173px;
 		font-style: italic;
 		color: $c-orange;
 		transform: translateY(100%);
@@ -121,7 +121,7 @@ hello
 		overflow: hidden;
 	}
 	.lcl-hello-bar {
-		@include duration-bar {
+		@include duration-bar(3.1) {
 			inset: auto auto 0 -32px;
 		}
 	}
@@ -224,10 +224,11 @@ about
 .lcl-about {
 	display: flex;
 	align-items: center;
-	padding-inline: 78px;
+	padding-inline: 73px;
 	width: 100%;
 	height: 100vh;
 	.lcl-about__in {
+		position: relative;
 		margin-left: 20px;
 		// padding-block: 187px 275px;
 		& > * {
@@ -243,8 +244,8 @@ about
 		}
 	}
 	.lcl-about-bar {
-		@include duration-bar {
-			inset: 0 auto -32px auto;
+		@include duration-bar(5.6) {
+			inset: auto -32px 0 auto;
 		}
 	}
 	.lcl-about-txt01 {
@@ -354,7 +355,10 @@ about
 			}
 		}
 	}
-	&.scr-in--on {
+	.lcl-about__in.scr-in--on {
+		.lcl-about-bar {
+			@include duration-bar--on;
+		}
 		.lcl-about-txt01 {
 			.lcl-about-txt01__02 {
 				&::after {
@@ -466,13 +470,29 @@ about
 photo
 ---------------------------------------------*/
 .lcl-photo {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-inline: 78px;
+	padding-inline: 73px;
 	width: 100%;
 	height: 100vh;
+	.lcl-photo-parallax {
+		position: absolute;
+		inset: 0 auto auto 50%;
+		width: calc(100% - 73px * 2);
+		height: 100%;
+		transform: translateX(-50%);
+		.lcl-photo-parallax__img {
+			position: absolute;
+			width: 220px;
+			&:nth-child(1) {
+				inset: 50% 0 auto auto;
+			}
+		}
+	}
 	.lcl-photo__in {
+		position: relative;
 		& > * {
 			width: fit-content;
 			font-size: 0;
@@ -484,97 +504,106 @@ photo
 		& > p > span {
 			overflow: hidden;
 		}
+	}
+
+	.lcl-photo-bar {
+		@include duration-bar(2.7) {
+			inset: auto auto 0 -32px;
+		}
+	}
+	.lcl-photo-txt01 {
+		.lcl-photo-txt01__01 {
+			& span {
+				transform: translateY(100%);
+				transition: transform 0.9s $e-power4-inOut1;
+			}
+		}
+		.lcl-photo-txt01__02 {
+			position: relative;
+			&::after {
+				@include txt-rect-reveal;
+			}
+			& span {
+				opacity: 0;
+				transition: opacity 0s 1.5s;
+			}
+		}
+	}
+	.lcl-photo-txt02 {
+		.lcl-photo-txt02__01 {
+			& span {
+				transform: translateY(100%);
+				transition: transform 0.9s 1.6s $e-power4-inOut1;
+			}
+		}
+		.lcl-photo-txt02__02 {
+			position: relative;
+			&::after {
+				@include txt-rect-reveal;
+			}
+			& span {
+				opacity: 0;
+				transition: opacity 0s 1.5s;
+			}
+		}
+		.lcl-photo-txt02__03 {
+			& span {
+				transform: translateY(100%);
+				transition: transform 0.9s 2.5s $e-power4-inOut1;
+			}
+		}
+		.lcl-photo-txt02__04 {
+			& span {
+				transform: translateY(100%);
+				transition: transform 0.9s 2.6s $e-power4-inOut1;
+			}
+		}
+		.lcl-photo-txt02__05 {
+			& span {
+				transform: scale(0);
+				transform-origin: 50% 68%;
+				transition: transform 0.9s 2.7s $e-power4-inOut1;
+			}
+		}
+	}
+	.lcl-photo__in.scr-in--on {
+		.lcl-photo-bar {
+			@include duration-bar--on;
+		}
 		.lcl-photo-txt01 {
 			.lcl-photo-txt01__01 {
 				& span {
-					transform: translateY(100%);
-					transition: transform 0.9s $e-power4-inOut1;
+					transform: translateY(0);
 				}
 			}
 			.lcl-photo-txt01__02 {
-				position: relative;
 				&::after {
-					@include txt-rect-reveal;
+					@include txt-rect-reveal-anim(0.6, 1, 1.5);
 				}
 				& span {
-					opacity: 0;
-					transition: opacity 0s 1.5s;
+					opacity: 1;
 				}
 			}
 		}
 		.lcl-photo-txt02 {
-			.lcl-photo-txt02__01 {
-				& span {
-					transform: translateY(100%);
-					transition: transform 0.9s 1.6s $e-power4-inOut1;
-				}
-			}
 			.lcl-photo-txt02__02 {
-				position: relative;
 				&::after {
-					@include txt-rect-reveal;
+					@include txt-rect-reveal-anim(0.6, 1, 2.4);
 				}
 				& span {
-					opacity: 0;
-					transition: opacity 0s 1.5s;
+					opacity: 1;
 				}
 			}
-			.lcl-photo-txt02__03 {
-				& span {
-					transform: translateY(100%);
-					transition: transform 0.9s 2.5s $e-power4-inOut1;
-				}
-			}
+			.lcl-photo-txt02__01,
+			.lcl-photo-txt02__03,
 			.lcl-photo-txt02__04 {
 				& span {
-					transform: translateY(100%);
-					transition: transform 0.9s 2.6s $e-power4-inOut1;
+					transform: translateY(0);
 				}
 			}
 			.lcl-photo-txt02__05 {
 				& span {
-					transform: scale(0);
-					transform-origin: 50% 68%;
-					transition: transform 0.9s 2.7s $e-power4-inOut1;
-				}
-			}
-		}
-		&.scr-in--on {
-			.lcl-photo-txt01 {
-				.lcl-photo-txt01__01 {
-					& span {
-						transform: translateY(0);
-					}
-				}
-				.lcl-photo-txt01__02 {
-					&::after {
-						@include txt-rect-reveal-anim(0.6, 1, 1.5);
-					}
-					& span {
-						opacity: 1;
-					}
-				}
-			}
-			.lcl-photo-txt02 {
-				.lcl-photo-txt02__02 {
-					&::after {
-						@include txt-rect-reveal-anim(0.6, 1, 2.4);
-					}
-					& span {
-						opacity: 1;
-					}
-				}
-				.lcl-photo-txt02__01,
-				.lcl-photo-txt02__03,
-				.lcl-photo-txt02__04 {
-					& span {
-						transform: translateY(0);
-					}
-				}
-				.lcl-photo-txt02__05 {
-					& span {
-						transform: scale(1);
-					}
+					transform: scale(1);
 				}
 			}
 		}
