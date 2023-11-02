@@ -189,13 +189,18 @@ function createText(font, text, size, color, posX, posY, posZ) {
 	});
 }
 
-// Directional Light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(1, 1, 1);
-// Poin Light
-const pointLight = new THREE.PointLight(0xffffff, 10000, 0, 0.01);
-pointLight.position.set(0, 0, -1000);
-scene.add(directionalLight, pointLight);
+// set Lights
+let pointLight;
+setLights();
+function setLights() {
+	// Directional Light
+	const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+	directionalLight.position.set(1, 1, 1);
+	// Poin Light
+	pointLight = new THREE.PointLight(0xffffff, 10000, 0, 0.01);
+	pointLight.position.set(0, 0, -1000);
+	scene.add(directionalLight, pointLight);
+}
 
 // scroll
 let scrollY = window.scrollY;
@@ -204,61 +209,64 @@ window.addEventListener("scroll", () => {
 });
 
 // box animation
-const boxAnim1 = gsap.timeline({
-	scrollTrigger: {
+setBoxAnimation();
+function setBoxAnimation() {
+	const boxAnim = gsap.timeline({
+		scrollTrigger: {
+			// markers: true,
+			trigger: ".lcl-hello",
+			scrub: 2,
+		},
+	});
+	boxAnim.add("hello", 0).add("about", 10);
+	// Hello
+	boxAnim
+		.to(
+			boxGroup.position,
+			{
+				x: w / -4,
+				z: 1000,
+				ease: "power2.inOut",
+			},
+			"hello"
+		)
+		.to(
+			box.rotation,
+			{
+				y: 3,
+				ease: "power3.inOut",
+			},
+			"<"
+		);
+	// About
+	boxAnim
+		.to(
+			boxGroup.position,
+			{
+				x: w / 4,
+				ease: "power2.inOut",
+			},
+			"abotut"
+		)
+		.to(
+			box.rotation,
+			{
+				x: 3,
+				ease: "power3.inOut",
+			},
+			"<"
+		);
+	// canvasを固定する
+	ScrollTrigger.create({
 		// markers: true,
 		trigger: ".lcl-hello",
-		end: "90% bottom",
-		scrub: 2,
-	},
-});
-boxAnim1
-	.to(boxGroup.position, {
-		x: w / -4,
-		z: 1000,
-		ease: "power2.inOut",
-	})
-	.to(
-		box.rotation,
-		{
-			y: 3,
-			ease: "power3.inOut",
-		},
-		"<"
-	);
-const boxAnim2 = gsap.timeline({
-	immediateRender: false,
-	scrollTrigger: {
-		// markers: true,
-		trigger: ".lcl-about",
-		start: "20% bottom",
-		end: "110% bottom",
-		scrub: 2,
-	},
-});
-boxAnim2
-	.to(boxGroup.position, {
-		x: w / 4,
-		ease: "power2.inOut",
-	})
-	.to(
-		box.rotation,
-		{
-			x: 3,
-			ease: "power3.inOut",
-		},
-		"<"
-	);
-// canvas pin
-ScrollTrigger.create({
-	// markers: true,
-	trigger: ".lcl-hello",
-	start: "top bottom",
-	endTrigger: ".lcl-about",
-	end: "50% 50%",
-	pin: ".lcl-canvas",
-	pinSpacing: false,
-});
+		start: "top bottom",
+		endTrigger: ".lcl-about",
+		end: "50% 50%",
+		pin: ".lcl-canvas",
+		pinSpacing: false,
+	});
+}
 
 // light follow mouse
 const mouse = {
@@ -374,4 +382,29 @@ window.addEventListener("DOMContentLoaded", () => {
 			},
 		});
 	});
+});
+
+/*---------------------------------------------
+ photo parallax
+---------------------------------------------*/
+const parallaxImgs = document.querySelectorAll(".lcl-photo-parallax__img");
+parallaxImgs.forEach((e) => {
+	const speed = e.dataset.speed;
+	const imgHeight = e.clientHeight;
+	gsap.fromTo(
+		e,
+		{
+			y: h * speed + imgHeight * (speed - 1),
+		},
+		{
+			y: -h * speed,
+			ease: "none",
+			scrollTrigger: {
+				// markers: true,
+				trigger: ".lcl-photo",
+				end: "bottom 50top",
+				scrub: 1 * speed,
+			},
+		}
+	);
 });

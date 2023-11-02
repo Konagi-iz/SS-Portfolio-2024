@@ -4,7 +4,7 @@
 @use "_parts.scss" as *;
 
 /*---------------------------------------------
-canvas
+ Canvas
 ---------------------------------------------*/
 .lcl-canvas {
 	position: absolute;
@@ -15,7 +15,7 @@ canvas
 }
 
 /*---------------------------------------------
-fv
+ Firstview
 ---------------------------------------------*/
 .lcl-fv {
 	width: 100%;
@@ -65,7 +65,7 @@ fv
 }
 
 /*---------------------------------------------
-hello
+ Hello
 ---------------------------------------------*/
 .lcl-hello {
 	display: flex;
@@ -219,7 +219,7 @@ hello
 }
 
 /*---------------------------------------------
-about
+ About
 ---------------------------------------------*/
 .lcl-about {
 	display: flex;
@@ -467,7 +467,7 @@ about
 }
 
 /*---------------------------------------------
-photo
+ Photo
 ---------------------------------------------*/
 .lcl-photo {
 	position: relative;
@@ -477,6 +477,7 @@ photo
 	padding-inline: 73px;
 	width: 100%;
 	height: 100vh;
+	margin-bottom: 156px;
 	.lcl-photo-parallax {
 		position: absolute;
 		inset: 0 auto auto 50%;
@@ -486,8 +487,25 @@ photo
 		.lcl-photo-parallax__img {
 			position: absolute;
 			width: 220px;
+			border-radius: 8px;
 			&:nth-child(1) {
-				inset: 50% 0 auto auto;
+				inset: 50% auto auto calc(100% - 220px);
+			}
+			&:nth-child(2) {
+				inset: 0 auto auto 64.37%;
+			}
+			&:nth-child(3) {
+				inset: 60% auto auto 45.74%;
+			}
+			&:nth-child(4) {
+				inset: 10% auto auto 27.12%;
+			}
+			&:nth-child(5) {
+				inset: 52% auto auto 8.5%;
+			}
+			&:nth-child(6) {
+				inset: 5% auto auto 0;
+				width: 330px;
 			}
 		}
 	}
@@ -608,10 +626,17 @@ photo
 			}
 		}
 	}
+	.lcl-photo__cam-info {
+		position: absolute;
+		inset: auto auto 0 93px;
+		font-family: $f-basic;
+		font-size: 16px;
+		color: $c-gray;
+	}
 }
 
 /*---------------------------------------------
-txt-rect-reveal keyframes
+ txt-rect-reveal keyframes
 ---------------------------------------------*/
 @keyframes txt-rect-reveal-01 {
 	0% {
@@ -644,5 +669,39 @@ txt-rect-reveal keyframes
 	}
 	100% {
 		transform: scale(1, 0);
+	}
+}
+
+/*---------------------------------------------
+ Loop txt
+---------------------------------------------*/
+.lcl-loop {
+	overflow: hidden;
+	width: 100%;
+	.lcl-loop__txt {
+		width: fit-content;
+		font-family: $f-disp;
+		font-size: 128px;
+		letter-spacing: -0.03em;
+		line-height: 1.48;
+		color: $c-gray;
+		white-space: nowrap;
+		animation: loop-txt 25s linear infinite;
+		&:nth-child(2) {
+			margin-top: -54px;
+			animation-direction: reverse;
+		}
+	}
+}
+
+/*---------------------------------------------
+ loop-txt
+---------------------------------------------*/
+@keyframes loop-txt {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
 	}
 }
