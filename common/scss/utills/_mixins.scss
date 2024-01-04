@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+/*------------------------------------------------
+mixins
+------------------------------------------------*/
+@mixin fz($font-size) {
+	font-size: $font-size / var(--fz) * 1rem;
+}
+
+/*------------------------------------------------
+font
+------------------------------------------------*/
+@mixin txt-basic {
+	@include fz(14);
+	font-weight: 400;
+	line-height: 1.9;
+	@include media_narrow {
+		@include fz(12);
+	}
+}
+
+@mixin txt-basic--bold {
+	@include txt-basic;
+	font-weight: 700;
+}
+
+@mixin ttl-display {
+	@include fz(128);
+	font-weight: 400;
+	font-style: italic;
+	line-height: 1.2;
+	@include media_narrow {
+		@include fz(52);
+	}
+}
+
+@mixin ttl-basic {
+	@include fz(72);
+	font-weight: 700;
+	line-height: 2;
+	@include media_narrow {
+		@include fz(29);
+	}
+}
+
+/*---------------------------------------------
+color
+---------------------------------------------*/
+$c-white: #ffffff;
+$c-black: #000000;
+$c-bg: #101010;
+$c-gray: #383838;
+$c-orange: #ff4b12;
+
+/*---------------------------------------------
+font
+---------------------------------------------*/
+@font-face {
+	font-family: 'Beatrice-Headline';
+	font-display: swap;
+	src: url(/common/assets/font/BeatriceHeadline-RegularItalic.woff) format('woff');
+}
+@font-face {
+	font-family: 'noto-sans-jp';
+	font-display: swap;
+	font-weight: normal;
+	src: url(/common/assets/font/NotoSansJP-Regular.woff2) format('woff2');
+}
+@font-face {
+	font-family: 'noto-sans-jp';
+	font-display: swap;
+	font-weight: bold;
+	src: url(/common/assets/font/NotoSansJP-Bold.woff2) format('woff2');
+}
+$f-disp: 'Beatrice-Headline', serif;
+$f-basic: 'Arial', sans-serif;
+// $f-jp: "noto-sans-jp", sans-serif;
+$f-jp: 'Noto Sans JP', sans-serif;
+
+/*---------------------------------------------
+ease
+---------------------------------------------*/
+$e-power4-inOut1: cubic-bezier(0.7, 0, 0.1, 1);
+
+/*------------------------------------------------
+media
+------------------------------------------------*/
+@mixin media_narrow {
+	@media screen and (max-width: 767px) {
+		@content;
+	}
+}
+
+@mixin media_wide {
+	@media screen and (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin media_hover {
+	@media (hover: hover) {
+		@content;
+	}
+}

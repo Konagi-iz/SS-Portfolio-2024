@@ -1,0 +1,18 @@
+{
+	"prettier.printWidth": 160,
+	"prettier.useTabs": true,
+	"prettier.singleQuote": true,
+	"liveSassCompile.settings.formats": [
+		{
+			"format": "expanded",
+			"extensionName": ".css",
+			"savePath": "~"
+		}
+	],
+	"[php]": {
+		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+	},
+	"[sass]": {
+		"editor.defaultFormatter": "sasa.vscode-sass-format",
+	}
+}
